@@ -10,14 +10,28 @@
         function calculateCircumference (radius) {
             return 2 * 3.14159 * radius;
         }
-        function milesToKm (miles) {
-            return miles*1.60934;
+        function distanceConversion (distance, isMiles) {
+            if (isMiles) {
+                return distance * 1.60934;
+            } else {
+                return distance * 0.62137;
+            }
+
         }
-        function gallonsToLiters (gallons) {
-            return gallons*3.78541;
+        function volumeConversion (volume, isGallons) {
+            if (isGallons) {
+                return volume * 3.78541;
+            } else {
+                return volume * 0.264172
+            }
+
         }
-        function cToF (celsius) {
-            return (celsius * 1.8) + 32;
+        function temperatureConversion (temperature, isFahrenheit) {
+            if(isFahrenheit){
+                return (temperature - 32) * 5 / 9;
+            } else {
+                return (temperature * 9 / 5) + 32;
+            }
         }
 
         function divisibleBySevenOrThree (number) {
@@ -30,6 +44,15 @@
 
         function divisibleByThreeOrOdd (number) {
             return (number % 3 === 0 || (number % 2 !== 0));
+        }
+
+        function returnFullName (firstName, middleName, lastName) {
+            return firstName + " " + middleName + " " + lastName;
+        }
+
+        function fullAddress (houseNumber, streetName, city, state, zipCode) {
+            return `${houseNumber} ${streetName}\n${city}, ${state} ${zipCode}`;
+            // return houseNumber + " " + streetName + " " + city + ", " + state + ", " + zipCode;
         }
 
     </script>
