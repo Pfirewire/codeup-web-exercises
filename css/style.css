@@ -2,3 +2,18 @@
     color: purple;
     text-decoration: underline;
 }
+
+header {
+    text-align: center;
+}
+
+h1, h2, h3 {
+    color: #185545;
+    text-decoration: underline;
+}
+
+body {
+    background: blanchedalmond;
+    background-image: url("../img/background-building.jpg");
+    background-size: cover;
+}
