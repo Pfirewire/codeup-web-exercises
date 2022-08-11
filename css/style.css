@@ -3,9 +3,9 @@
     text-decoration: underline;
 }
 
-header {
-    text-align: center;
-}
+/*header {*/
+/*    text-align: center;*/
+/*}*/
 
 h1, h2, h3 {
     color: #185545;
@@ -13,7 +13,43 @@ h1, h2, h3 {
 }
 
 body {
+    font-family: "Times New Roman";
     background: blanchedalmond;
     background-image: url("../img/background-building.jpg");
     background-size: cover;
+}
+
+ul {
+    list-style: square;
+}
+
+td, tr {
+    padding: 50px;
+    font-size: x-large;
+}
+
+#bottom-table {
+    color: #217e7e;
+}
+
+a:link {
+    font-size: large;
+}
+
+a:visited {
+    font-size: small;
+}
+
+a:hover {
+    color: brown;
+}
+
+a:active {
+    color: green;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
