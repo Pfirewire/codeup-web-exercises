@@ -86,6 +86,18 @@
         function stringSubset (string, index1, index2) {
             return string.substring(index1, index2);
         }
+
+        function isNumber (value) {
+            return !(isNaN(value) || typeof value === "boolean");
+        }
+
+        function productIfNumbers (value1, value2) {
+            if (isNumber(parseFloat(value1)) && isNumber(parseFloat(value2))){
+                return parseFloat(value1) * parseFloat(value2);
+            } else {
+                return false;
+            }
+        }
     </script>
 </body>
 </html>
