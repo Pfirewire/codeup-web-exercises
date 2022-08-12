@@ -37,12 +37,7 @@ if (canEnroll) {
 let isPremiumMember = confirm("Are you a Premium Member at ExploitMart?");
 let numberOfProducts = prompt("How many products are you buying?");
 let isOfferExpired = confirm("Is your offer expired?");
-let offerValid;
-if (isPremiumMember) {
-    offerValid = !isOfferExpired;
-} else {
-    offerValid = (numberOfProducts > 2) && !isOfferExpired;
-}
+let offerValid = (isPremiumMember || numberOfProducts > 2) && !isOfferExpired;
 if (offerValid) {
     alert("You have received a .0001% discount from ExploitMart!");
 } else {
