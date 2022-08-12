@@ -2,7 +2,7 @@ console.log("Hello from external JavaScript");
 
 alert("Welcome to my Website!");
 
-let favColor = prompt("What is your favorite color?");
+let favColor = prompt("What is your favorite color?").toLowerCase();
 alert(`Great, ${favColor} is my favorite color too!`);
 
 // Exercise 3.1
@@ -23,13 +23,13 @@ alert(`Congratulations! You have made a total of $${totalAmountPaid} this week. 
 
 // Exercise 3.3
 
-let isScheduleFull = confirm("Thanks for your interest in Javascript 101. Is your schedule full? OK if yes, Cancel if no.");
-let hasConflict = confirm("Does this course conflict with any of your other courses? OK if yes, Cancel if no.");
-let canEnroll = !(isScheduleFull || hasConflict);
+let isClassFull = confirm("Is the class full? OK if yes, Cancel if no.");
+let hasConflict = confirm("Is there a schedule conflict? OK if yes, Cancel if no.");
+let canEnroll = !(isClassFull || hasConflict);
 if (canEnroll) {
-    alert("Congratulations, you are enrolled in Javascript 101.");
+    alert("The student is now enrolled.");
 } else {
-    alert("I'm sorry, you are unable to enroll in Javascript 101");
+    alert("The student cannot enroll in this class.");
 }
 
 // Exercise 3.4
