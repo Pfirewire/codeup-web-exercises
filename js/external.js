@@ -5,16 +5,13 @@ alert("Welcome to my Website!");
 let favColor = prompt("What is your favorite color?");
 alert(`Great, ${favColor} is my favorite color too!`);
 
-
 // Exercise 3.1
 
 let hercules = prompt("How many days did you rent Hercules?");
 let brotherBear = prompt("How many days did you rent Brother Bear?");
 let theLittleMermaid = prompt("How many days did you rent The Little Mermaid?");
-let price = prompt("How much per movie per day did you pay?");
-let totalPrice = (hercules * price) + (brotherBear * price) + ( theLittleMermaid * price);
+let totalPrice = (hercules * 3) + (brotherBear * 3) + ( theLittleMermaid * 3);
 alert(`You paid a total of ${totalPrice} for your rentals.`);
-
 
 // Exercise 3.2
 
@@ -23,7 +20,6 @@ let facebook = prompt("How many hours did you work for Facebook?");
 let amazon = prompt("How many hours did you work for Amazon?");
 let totalAmountPaid = (google * 400) + (amazon * 380) + (facebook * 350);
 alert(`Congratulations! You have made a total of $${totalAmountPaid} this week. Holy cow!`);
-
 
 // Exercise 3.3
 
@@ -35,7 +31,6 @@ if (canEnroll) {
 } else {
     alert("I'm sorry, you are unable to enroll in Javascript 101");
 }
-
 
 // Exercise 3.4
 
