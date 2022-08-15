@@ -25,6 +25,11 @@
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
+<button id="btn_1">Change Header Text</button>
+<button id="btn_2">Change Sub Header Color</button>
+<button id="btn_3">Change List Colors</button>
+<button id="btn_4">Finish Mission</button>
+
 <script>
     (function() {
         "use strict";
@@ -33,14 +38,19 @@
         // console.log(mainHeader.innerHTML);
 
         // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = "JavaScript is Cool"
+        function changeHeaderText() {
+            mainHeader.innerHTML = "JavaScript is Cool"
+        }
+
         // console.log(mainHeader.innerHTML);
 
         // TODO: Uncomment the next line and get the sub header element by id
         let subHeader = document.getElementById("sub-header");
 
         // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = "blue";
+        function changeSubHeaderColor() {
+            subHeader.style.color = "blue";
+        }
 
         // TODO: Uncomment the next line and get all list items
         let listItems = document.getElementsByTagName("li");
@@ -48,11 +58,13 @@
 
         // TODO: Set text color on every other list item to grey
         // TODO: Set text color of li with dbid = 1 to blue
-        for(let i = 0; i < listItems.length; i++){
-            if (listItems[i].getAttribute("data-dbid") === "1") {
-                listItems[i].style.color = "blue";
-            } else if (i % 2 == 0) {
-                listItems[i].style.color = "grey";
+        function changeListColors() {
+            for (let i = 0; i < listItems.length; i++) {
+                if (listItems[i].getAttribute("data-dbid") === "1") {
+                    listItems[i].style.color = "blue";
+                } else if (i % 2 == 0) {
+                    listItems[i].style.color = "grey";
+                }
             }
         }
 
@@ -60,7 +72,14 @@
         let subParagraphs = document.getElementsByClassName("sub-paragraph");
         console.log(subParagraphs);
         // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-        subParagraphs[0].innerText = "Mission Accomplished!";
+        function finishMission() {
+            subParagraphs[0].innerText = "Mission Accomplished!";
+        }
+
+        document.getElementById("btn_1").addEventListener("click", changeHeaderText);
+        document.getElementById("btn_2").addEventListener("click", changeSubHeaderColor);
+        document.getElementById("btn_3").addEventListener("click", changeListColors);
+        document.getElementById("btn_4").addEventListener("click", finishMission);
     })();
 </script>
 </body>
