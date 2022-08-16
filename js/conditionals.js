@@ -112,6 +112,9 @@ console.log(analyzeColor(prompt("Please enter a color.")));
 
 function calculateTotal(luckyNumber, totalAmount) {
     switch (parseInt(luckyNumber)) {
+        case 0:
+            return totalAmount;
+            break;
         case 1:
             return totalAmount * .9;
             break;
@@ -146,8 +149,7 @@ function calculateTotal(luckyNumber, totalAmount) {
 var luckyNumber = Math.floor(Math.random() * 6);
 let billTotal = prompt("What is the total of your bill?");
 let discountedTotal = calculateTotal(luckyNumber, billTotal).toFixed(2);
-alert(`Your Lucky Number is ${luckyNumber}!`);
-alert(`Your bill of $${billTotal} has been discounted to $${discountedTotal}.`);
+alert(`Your Lucky Number is ${luckyNumber}! \nYour bill of $${billTotal} has been discounted to $${discountedTotal}.`);
 
 
 /**
@@ -169,19 +171,19 @@ alert(`Your bill of $${billTotal} has been discounted to $${discountedTotal}.`);
  * HINT: The way we prompt for a value could be improved
  */
 
+const isEven = num => num % 2 === 0;
+const isPositive = num => num > 0;
+const isNegative = num => num < 0;
+const plus100 = num => num + 100;
+const oddOrEven = num => isEven(num) ? "even" : "odd";
+const positiveNegativeOrZero = num => isPositive(num) ? "positive" : isNegative(num) ? "negative" : "neither positive or negative";
+
 if(confirm("Would you like to enter a number?")) {
     let userNum = parseInt(prompt("Enter your number now"));
-    if(userNum % 2 === 0){
-        alert("Your number is even.");
+    if(isNaN(userNum)){
+        alert("That is not a number");
     } else {
-        alert("Your number is odd.");
-    }
-    alert(`Your number plus 100 is ${userNum + 100}`);
-    if(userNum < 0) {
-        alert("Your number is negative.");
-    } else if(userNum > 0) {
-        alert("Your number is positive.");
-    } else {
-        alert("Your number is neither negative or positive.");
+        alert(`${userNum} is ${oddOrEven(userNum)} and ${positiveNegativeOrZero(userNum)}`);
+        alert(`${userNum} plus 100 is ${plus100(userNum)}`);
     }
 }

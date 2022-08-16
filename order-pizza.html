@@ -2,11 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Introduction Exercises</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-start">
+                <a class="navbar-brand" href="#">Pizza World</a>
+                <a class="nav-item nav-link active mx-0" href="#">Order Online</a>
+                <a class="nav-item nav-link mx-0" href="#">Menu</a>
+                <input class="nav-item ms-0" type="text" placeholder="Zip Code">
+                <button type="button" class="nav-items btn btn-outline-primary ms-1">Search stores near you!</button>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="nav-item mx-2 pt-1" for="signup"><i class="bi bi-person-circle"></i></div>
+                <input class="nav-item" id="signup" type="text" placeholder="Sign Up">
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron d-flex">
+            <h1 class="bg-light m-auto" style="--bs-bg-opacity: .75;">Welcome to Pizza World</h1>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
