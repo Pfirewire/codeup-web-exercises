@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+</head>
+<body>
+    <h1>Konami Code</h1>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        "use strict";
+        let userCode = "";
+        $(document).keyup(function(event){
+            userCode = `${userCode + ((event.key).toString())} `;
+            if (userCode === "ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a Enter ") {
+                //alert(`Cheat enabled!`);
+                $("body").css("background-color", "black");
+                $("body").css("color", "red");
+                $("h1").html("CHEAT MODE ENABLED");
+            }
+        });
+
+    </script>
+</body>
+</html>
