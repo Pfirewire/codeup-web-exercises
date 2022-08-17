@@ -1,0 +1,13 @@
+dt {
+    margin-top: 2em;
+    margin-bottom: .5em;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.highlighted {
+    background-color: yellow;
+    color: black;
+}
