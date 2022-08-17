@@ -24,10 +24,10 @@
      * string, and <li> tags around each planet.
      */
     //let planetsStringBR = "Mercury<br>Venus<br>Earth<br>Mars<br>Jupiter<br>Saturn<br>Uranus<br>Neptune";
-    let planetsStringBR = planetsString.replaceAll("|", "<br>");
+    let planetsStringBR = planetsArray.join("<br>");
     console.log(planetsStringBR);
 
     //let planetsStringUL = "<ul><li>Mercury</li><li>Venus<</li><li>Earth</li><li>Mars</li><li>Jupiter</li><li>Saturn</li><li>Uranus</li><li>Neptune</li></ul>";
-    let planetsStringUL = `<ul><li>${planetsString.replaceAll("|", "</li><li>")}</li></ul>`
+    let planetsStringUL = `<ul><li>${planetsArray.join("</li><li>")}</li></ul>`;
     console.log(planetsStringUL);
 })();
