@@ -11,3 +11,19 @@ dt {
     background-color: yellow;
     color: black;
 }
+
+.picture-frame {
+    height: 150px;
+    width: 150px;
+    border: 5px solid brown;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}

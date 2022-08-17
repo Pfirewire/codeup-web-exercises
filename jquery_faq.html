@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/jquery_faq.css">
 </head>
 <body>
-    <h3>National Parks FAQs:</h3>
+    <h1>National Parks FAQs:</h1>
+    <button id="toggle-visibility">Toggle Answer Visibility</button>
 
     <dl>
         <dt>Who is the director of the National Park Service?</dt>
@@ -49,7 +50,51 @@
         </dd>
     </dl>
 
-    <button id="toggle-visibility">Toggle Answer Visibility</button>
+    <h1>Parks List</h1>
+    <h3>Arches National Park</h3>
+    <ul class="park-list">
+        <li>Longest arch: Landscape Arch has a light opening 306 feet (93.3 meters) across</li>
+        <li>Tallest arch: Double Arch South has a vertical light opening of 112 feet (34.1 meters)</li>
+        <li>Average annual precipitation: 8-10 inches</li>
+        <li>Number of documented arches: Over 2,000 (Some may have fallen and new arches may be forming)</li>
+    </ul>
+    <h3>Grand Canyon National Park</h3>
+    <ul class="park-list">
+        <li>Was made a national monument in 1908 and became a national park in 1919</li>
+        <li>Covers an area of 1,900 square miles</li>
+        <li>Is 190 miles long</li>
+        <li>Contains some 277 miles of the Colorado River is populated by five Indian tribes: The Hopi, Navajo, Havasupai, Paiute and Hualapai</li>
+    </ul>
+    <h3>Mammoth Cave National Park</h3>
+    <ul class="park-list">
+        <li>Mammoth Cave National Park was officially dedicated on July 1, 1941</li>
+        <li>The natural arch that admits one to Mammoth Cave has a span of 21 meters (70 feet), and from a ledge above it a cascade leaps 18 meters (59 feet) to the rocks below, where it disappears</li>
+        <li>While cave temperatures can vary widely near entrances (especially in winter), deep cave temperature is 12ºC (54ºF)</li>
+        <li>The story of human beings in relation to Mammoth Cave spans six thousand years</li>
+    </ul>
+
+    <button id="add-yellow-btn">Make some Yellow!</button>
+
+    <div class="container">
+        <div>
+            <div class="picture-frame left-frame">
+                <img id="left-img" src="img/background-building.jpg">
+            </div>
+            <button id="left-btn" class="btn">Swap</button>
+        </div>
+        <div>
+            <div class="picture-frame center-frame">
+                <img id="center-img" src="img/business-space.jpg">
+            </div>
+            <button id="center-btn" class="btn">Swap</button>
+        </div>
+        <div>
+            <div class="picture-frame right-frame">
+                <img id="right-img" src="img/hiker.jpg">
+            </div>
+            <button id="right-btn" class="btn">Swap</button>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="js/jquery_faq.js"></script>
