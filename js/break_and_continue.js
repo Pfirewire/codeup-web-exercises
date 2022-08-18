@@ -1,6 +1,6 @@
-let isBetweenOneAndFiftyAndOdd = false;
+let isOddAndBetweenOneAndFifty = false;
 let userNumber;
-while (isBetweenOneAndFiftyAndOdd === false) {
+while (isOddAndBetweenOneAndFifty === false) {
     userNumber = parseInt(prompt("Enter an odd number between 1 and 50"));
     if (userNumber > 1 && userNumber < 50 && userNumber % 2 !== 0) {
         break;

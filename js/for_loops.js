@@ -18,9 +18,7 @@ for (let i = 1; i < 11; i++) {
 }
 
 for (let i = 1; i < 10; i++) {
-    for (let j = 1; j <= i; j++) {
-        console.log(i);
-    }
+    console.log(i.toString().repeat(i));
 }
 
 for (let i = 100; i > 0; i -= 5) {
