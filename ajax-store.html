@@ -48,13 +48,18 @@
         })
             .done(function (data) {
                 for (let i = 0; i < data.length; i++) {
-                    $("#insertProducts").append(`<tr><th>${data[i].title}</th><th>${data[i].quantity}</th><th>$${data[i].price.toFixed(2)}</th><th>${data[i].categories.join(", ")}</th></tr>`);
+                    $("#insertProducts").append(`
+                        <tr>
+                            <th>${data[i].title}</th>
+                            <th>${data[i].quantity}</th>
+                            <th>$${data[i].price.toFixed(2)}</th>
+                            <th>${data[i].categories.join(", ")}</th>
+                        </tr>
+                    `);
                 }
             })
             .fail(function () {
                 console.log("Get request failed.");
-            })
-            .always(function () {
             });
     }
     $("#refresh-btn").click(function () {

@@ -67,6 +67,9 @@
                             </div>
                         `);
                     }
+                })
+                .fail(function () {
+                    console.log("Get request failed.");
                 });
         }
         populateBlogs();
