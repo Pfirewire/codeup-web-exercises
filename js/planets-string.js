@@ -30,4 +30,8 @@
     //let planetsStringUL = "<ul><li>Mercury</li><li>Venus<</li><li>Earth</li><li>Mars</li><li>Jupiter</li><li>Saturn</li><li>Uranus</li><li>Neptune</li></ul>";
     let planetsStringUL = `<ul><li>${planetsArray.join("</li><li>")}</li></ul>`;
     console.log(planetsStringUL);
+
+
+
+
 })();

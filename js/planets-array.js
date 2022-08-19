@@ -45,4 +45,14 @@
     console.log("Sorting the planets array.");
     planets.sort();
     console.log(planets);
+
+
+    const toZatanna = sentence => {
+        let array = sentence.toLowerCase().split(" ");
+        array.forEach((e, i, a) => {
+            a[i] = e.split("").reverse().join("");
+        });
+        alert(array.join(" "));
+    }
+    toZatanna(prompt("Enter a sentence to be Zatanna-ized: "));
 })();
