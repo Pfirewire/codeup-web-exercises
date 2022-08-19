@@ -52,7 +52,7 @@
     "use strict";
     $(function (){
 
-        mapboxgl.accessToken = mapBoxExercisesKey;
+        mapboxgl.accessToken = MAPBOX_KEY;
         let currentMarkers = [];
         let bouncingStart;
         let bouncingMarker = new mapboxgl.Marker();
@@ -129,7 +129,7 @@
         // UNUSED
         // center map on paris when clicked
         // $("#parisButton").click(() => {
-        //     geocode("Paris, France", mapBoxExercisesKey).then(result => {
+        //     geocode("Paris, France", MAPBOX_KEY).then(result => {
         //         console.log(result);
         //         map.setCenter(result);
         //         map.setZoom(10);
@@ -164,7 +164,7 @@
                 `);
 
                 // running geocode function to find lng and lat coordinates from address
-                geocode(e.address, mapBoxExercisesKey).then(result => {
+                geocode(e.address, MAPBOX_KEY).then(result => {
                     restaurantMarker.setLngLat(result).addTo(map).setPopup(restaurantPopup);
                     map.setZoom(11);
                     i === 1 ? map.setCenter(result) : false;
@@ -191,7 +191,7 @@
 
         // center and add marker on address provided by user on click
         $("#go-to-user-geocode-btn").click(() => {
-            geocode($("#user-geocode").val(), mapBoxExercisesKey).then(result => {
+            geocode($("#user-geocode").val(), MAPBOX_KEY).then(result => {
                 let userMarker = new mapboxgl.Marker();
                 currentMarkers.push(userMarker);
                 userMarker.setLngLat(result).addTo(map);
