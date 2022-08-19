@@ -10,6 +10,15 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css' rel='stylesheet' />
     <script type="text/javascript" src="js/keys.js"></script>
+    <style>
+        .marker {
+            display: block;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,12 +27,12 @@
 <div class="container m-auto d-flex justify-content-center">
 <!--    <button id="parisButton">Bring me to Paris!</button>-->
     <label for="zoom-level"><button id="set-zoom-btn">Set Zoom Level</button></label>
-    <input id="zoom-level" type="textbox" placeholder="Enter zoom (1-20)">
-<!--    <select name="zoom-level" id="zoom-level" autocomplete="off">-->
-<!--        <option value="5">5</option>-->
-<!--        <option value="10">10</option>-->
-<!--        <option value="15">15</option>-->
-<!--    </select>-->
+<!--    <input id="zoom-level" type="textbox" placeholder="Enter zoom (1-20)">-->
+    <select name="zoom-level" id="zoom-level" autocomplete="off">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
     <button id="favorite-restaurant" class="mx-4">My Favorite San Antonio Restaurants</button>
     <input type="textbox" id="user-geocode" placeholder="Enter address here" autocomplete="off">
     <label for="user-geocode"><button id="go-to-user-geocode-btn">Go!</button></label>
@@ -59,7 +68,8 @@
                     "img/big-poppas-1.jpg",
                     "img/big-poppas-2.jpg",
                     "img/big-poppas-3.jpg"
-                ]
+                ],
+                markerImage: "img/big-poppas-1.jpg"
             }, {
                 name: "Paloma Blanca Mexican Cuisine",
                 address: "5800 Broadway #300, San Antonio, TX 78209",
@@ -70,7 +80,8 @@
                     "img/paloma-blanca-1.jpg",
                     "img/paloma-blanca-2.jpg",
                     "img/paloma-blanca-3.jpg"
-                ]
+                ],
+                markerImage: "img/paloma-blanca-1.jpg"
             }, {
                 name: "Two Bros. BBQ Market",
                 address: "12656 West Ave, San Antonio, TX 78216",
@@ -81,7 +92,8 @@
                     "img/two-brothers-1.jpg",
                     "img/two-brothers-2.jpg",
                     "img/two-brothers-3.jpg"
-                ]
+                ],
+                markerImage: "img/two-brothers-1.jpg"
             }
         ];
         // create initial map
@@ -117,7 +129,16 @@
         // show markers of restaurants in favoriteRestaurants array and centers at index 1
         $("#favorite-restaurant").click(() => {
             favoriteRestaurants.forEach((e, i) => {
-                let restaurantMarker = new mapboxgl.Marker();
+                let el = document.createElement("div");
+                el.className = "marker";
+                el.style.backgroundImage = `url(${e.markerImage})`;
+                console.log(el.style.backgroundImage);
+                // el.style.backgroundImage = e.markerImage;
+                el.style.height = "50px";
+                el.style.width = "50px";
+                el.style.backgroundSize = "100%";
+
+                let restaurantMarker = new mapboxgl.Marker(el);
                 currentMarkers.push(restaurantMarker);
                 let restaurantPopup = new mapboxgl.Popup().setHTML(`
                     <p>${e.name}</p>
