@@ -22,12 +22,15 @@
 </head>
 <body>
 
+<!--header-->
 <h1 style="margin: auto; margin-bottom: .5em; width: 100%; text-align: center;">My First Map</h1>
+
+<!--map-->
 <div id='map' style='margin: auto; margin-bottom: 1.5em; width: 80%; height: 600px;'></div>
+
+<!--bottom buttons-->
 <div class="container m-auto d-flex justify-content-center">
-<!--    <button id="parisButton">Bring me to Paris!</button>-->
     <label for="zoom-level"><button id="set-zoom-btn">Set Zoom Level</button></label>
-<!--    <input id="zoom-level" type="textbox" placeholder="Enter zoom (1-20)">-->
     <select name="zoom-level" id="zoom-level" autocomplete="off">
         <option value="5">5</option>
         <option value="10">10</option>
@@ -39,8 +42,6 @@
     <button id="clear-markers-btn" class="mx-4">Clear All Markers</button>
     <button id="bounce-btn">Create Bouncy!</button>
 </div>
-
-
 
 <!--       Scripts       -->
 <!-- jQuery -->
@@ -55,7 +56,22 @@
         let currentMarkers = [];
         let bouncingStart;
         let bouncingMarker = new mapboxgl.Marker();
-        let restaurantPopup = new mapboxgl.Popup().setHTML("China and Thai Cuisine");
+        let restaurantPopup = new mapboxgl.Popup();
+
+
+        // create initial map
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [-98.48954479592629, 29.42675986019988], // starting position [lng, lat]
+            zoom: 17, // starting zoom
+            projection: 'globe' // display the map as a 3D globe
+        });
+        map.on('style.load', () => {
+            map.setFog({}); // Set the default atmosphere style
+        });
+
+
         // array of fav restaurants
         let favoriteRestaurants = [
             {
@@ -96,18 +112,9 @@
                 markerImage: "img/two-brothers-1.jpg"
             }
         ];
-        // create initial map
-        const map = new mapboxgl.Map({
-          container: 'map', // container ID
-          style: 'mapbox://styles/mapbox/streets-v11', // style URL
-          center: [-98.48954479592629, 29.42675986019988], // starting position [lng, lat]
-          zoom: 17, // starting zoom
-          projection: 'globe' // display the map as a 3D globe
-        });
-        map.on('style.load', () => {
-          map.setFog({}); // Set the default atmosphere style
-        });
-        // copied geocode function. returns longitute and latitude
+
+
+        // copied geocode function. returns longitude and latitude
         function geocode(search, token) {
             var baseUrl = 'https://api.mapbox.com';
             var endPoint = '/geocoding/v5/mapbox.places/';
@@ -118,28 +125,35 @@
                     return data.features[0].center;
                 });
         }
+
+        // UNUSED
         // center map on paris when clicked
-        $("#parisButton").click(() => {
-            geocode("Paris, France", mapBoxExercisesKey).then(result => {
-                console.log(result);
-                map.setCenter(result);
-                map.setZoom(10);
-            });
-        });
+        // $("#parisButton").click(() => {
+        //     geocode("Paris, France", mapBoxExercisesKey).then(result => {
+        //         console.log(result);
+        //         map.setCenter(result);
+        //         map.setZoom(10);
+        //     });
+        // });
+
+
         // show markers of restaurants in favoriteRestaurants array and centers at index 1
         $("#favorite-restaurant").click(() => {
             favoriteRestaurants.forEach((e, i) => {
+
+                //creating element to add background image and other style to
                 let el = document.createElement("div");
                 el.className = "marker";
                 el.style.backgroundImage = `url(${e.markerImage})`;
-                console.log(el.style.backgroundImage);
-                // el.style.backgroundImage = e.markerImage;
                 el.style.height = "50px";
                 el.style.width = "50px";
                 el.style.backgroundSize = "100%";
 
+                // creating marker with element as well as image and style
                 let restaurantMarker = new mapboxgl.Marker(el);
                 currentMarkers.push(restaurantMarker);
+
+                // creating popup with restaurant information
                 let restaurantPopup = new mapboxgl.Popup().setHTML(`
                     <p>${e.name}</p>
                     <p>${e.address}</p>
@@ -149,6 +163,7 @@
                     ${setHTMLImage(e.images)}
                 `);
 
+                // running geocode function to find lng and lat coordinates from address
                 geocode(e.address, mapBoxExercisesKey).then(result => {
                     restaurantMarker.setLngLat(result).addTo(map).setPopup(restaurantPopup);
                     map.setZoom(11);
@@ -156,16 +171,24 @@
                 });
             });
         });
+
+
         // sets zoom level by user number input
         $("#set-zoom-btn").click(() => {
             let userInput = $("#zoom-level").val();
-            if(isNaN(userInput) || typeof userInput === "boolean" || userInput === null || userInput < 1 || userInput > 20) {
-                alert("Zoom Level must be a number between 1-20")
-                $("#zoom-level").val(null);
-            } else {
-                map.setZoom(userInput);
-            }
+
+            // UNUSED
+            // checking to see if userInput is number and betwee 1-20
+            // if(isNaN(userInput) || typeof userInput === "boolean" || userInput === null || userInput < 1 || userInput > 20) {
+            //     alert("Zoom Level must be a number between 1-20")
+            //     $("#zoom-level").val(null);
+            // } else {
+            //     map.setZoom(userInput);
+            // }
+            map.setZoom(userInput);
         });
+
+
         // center and add marker on address provided by user on click
         $("#go-to-user-geocode-btn").click(() => {
             geocode($("#user-geocode").val(), mapBoxExercisesKey).then(result => {
@@ -176,21 +199,26 @@
                 map.setZoom(17);
             })
         });
+
+
         // when hide marker button pushed, hides all markers
         $("#clear-markers-btn").click(() => {
             currentMarkers.forEach(e => {
                 e.remove();
             });
         });
+
+
         // calls animateMarker when bounce button clicked
         $("#bounce-btn").click(() => {
             // initialize marker at center of map and add to currentMarkers array
             currentMarkers.push(bouncingMarker);
             bouncingMarker.setLngLat(map.getCenter()).addTo(map);
             bouncingStart = map.getCenter();
-            console.log(bouncingStart);
             requestAnimationFrame(animateMarker);
         });
+
+
         // function to return string of HTML with each image source included in array
         const setHTMLImage = array => {
             let imgHTML = "";
@@ -199,16 +227,21 @@
             });
             return imgHTML;
         }
+
+
         // function to animate a marker
         const animateMarker = timestamp => {
             // change radius based on current zoom level
-
             let radius = (0.0000342857*Math.pow(map.getZoom(), 2)) - (0.00134229*map.getZoom()) + 0.01317;
+
+            // set marker coords based on radius
             bouncingMarker.setLngLat([
                 bouncingStart.lng,
                 (Math.abs(Math.sin(timestamp / 240) * radius)) + bouncingStart.lat
             ]);
             bouncingMarker.addTo(map);
+
+            // repeat function per frame
             requestAnimationFrame(animateMarker);
         }
     });
