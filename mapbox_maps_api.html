@@ -18,15 +18,17 @@
 <div class="container m-auto d-flex justify-content-center">
 <!--    <button id="parisButton">Bring me to Paris!</button>-->
     <label for="zoom-level"><button id="set-zoom-btn">Set Zoom Level</button></label>
-    <select name="zoom-level" id="zoom-level" autocomplete="off">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-    </select>
+    <input id="zoom-level" type="textbox" placeholder="Enter zoom (1-20)">
+<!--    <select name="zoom-level" id="zoom-level" autocomplete="off">-->
+<!--        <option value="5">5</option>-->
+<!--        <option value="10">10</option>-->
+<!--        <option value="15">15</option>-->
+<!--    </select>-->
     <button id="favorite-restaurant" class="mx-4">My Favorite San Antonio Restaurants</button>
     <input type="textbox" id="user-geocode" placeholder="Enter address here" autocomplete="off">
     <label for="user-geocode"><button id="go-to-user-geocode-btn">Go!</button></label>
     <button id="clear-markers-btn" class="mx-4">Clear All Markers</button>
+    <button id="bounce-btn">Create Bouncy!</button>
 </div>
 
 
@@ -42,6 +44,8 @@
 
         mapboxgl.accessToken = mapBoxExercisesKey;
         let currentMarkers = [];
+        let bouncingStart;
+        let bouncingMarker = new mapboxgl.Marker();
         let restaurantPopup = new mapboxgl.Popup().setHTML("China and Thai Cuisine");
         // array of fav restaurants
         let favoriteRestaurants = [
@@ -148,7 +152,7 @@
                 currentMarkers.push(userMarker);
                 userMarker.setLngLat(result).addTo(map);
                 map.setCenter(result);
-                map.setCenter(17);
+                map.setZoom(17);
             })
         });
         // when hide marker button pushed, hides all markers
@@ -157,6 +161,15 @@
                 e.remove();
             });
         });
+        // calls animateMarker when bounce button clicked
+        $("#bounce-btn").click(() => {
+            // initialize marker at center of map and add to currentMarkers array
+            currentMarkers.push(bouncingMarker);
+            bouncingMarker.setLngLat(map.getCenter()).addTo(map);
+            bouncingStart = map.getCenter();
+            console.log(bouncingStart);
+            requestAnimationFrame(animateMarker);
+        });
         // function to return string of HTML with each image source included in array
         const setHTMLImage = array => {
             let imgHTML = "";
@@ -164,6 +177,18 @@
                 imgHTML = imgHTML.concat(`<img src="${e}" style="max-width: 50px; margin: 2px;">`);
             });
             return imgHTML;
+        }
+        // function to animate a marker
+        const animateMarker = timestamp => {
+            // change radius based on current zoom level
+
+            let radius = (0.0000342857*Math.pow(map.getZoom(), 2)) - (0.00134229*map.getZoom()) + 0.01317;
+            bouncingMarker.setLngLat([
+                bouncingStart.lng,
+                (Math.abs(Math.sin(timestamp / 240) * radius)) + bouncingStart.lat
+            ]);
+            bouncingMarker.addTo(map);
+            requestAnimationFrame(animateMarker);
         }
     });
 </script>
