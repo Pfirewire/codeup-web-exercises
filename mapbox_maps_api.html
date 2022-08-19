@@ -17,8 +17,12 @@
 <div id='map' style='margin: auto; margin-bottom: 1.5em; width: 80%; height: 600px;'></div>
 <div class="container m-auto d-flex justify-content-center">
     <button id="parisButton">Bring me to Paris!</button>
-    <label for="zoom-level"><button id="set-zoom-btn">Set Zoom Level</button></label>
-    <input type="textbox" id="zoom-level" placeholder="Enter Zoom Level (1-20)" autocomplete="off">
+    <label for="zoom-level"><button id="set-zoom-btn" class="ms-2">Set Zoom Level</button></label>
+    <select name="zoom-level" id="zoom-level" class="me-2">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
     <button id="favorite-restaurant">My Favorite San Antonio Restaurants</button>
 </div>
 
@@ -32,7 +36,6 @@
 <script>
     "use strict";
     $(function (){
-
 
         mapboxgl.accessToken = mapBoxExercisesKey;
         let restaurantMarker = new mapboxgl.Marker();
@@ -134,7 +137,7 @@
                 map.setZoom(userInput);
             }
         });
-
+        // function to return string of HTML with each image source included in array
         const setHTMLImage = array => {
             let imgHTML = "";
             array.forEach(e => {
