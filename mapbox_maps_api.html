@@ -16,14 +16,17 @@
 <h1 style="margin: auto; margin-bottom: .5em; width: 100%; text-align: center;">My First Map</h1>
 <div id='map' style='margin: auto; margin-bottom: 1.5em; width: 80%; height: 600px;'></div>
 <div class="container m-auto d-flex justify-content-center">
-    <button id="parisButton">Bring me to Paris!</button>
-    <label for="zoom-level"><button id="set-zoom-btn" class="ms-2">Set Zoom Level</button></label>
-    <select name="zoom-level" id="zoom-level" class="me-2">
+<!--    <button id="parisButton">Bring me to Paris!</button>-->
+    <label for="zoom-level"><button id="set-zoom-btn">Set Zoom Level</button></label>
+    <select name="zoom-level" id="zoom-level" autocomplete="off">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
     </select>
-    <button id="favorite-restaurant">My Favorite San Antonio Restaurants</button>
+    <button id="favorite-restaurant" class="mx-4">My Favorite San Antonio Restaurants</button>
+    <input type="textbox" id="user-geocode" placeholder="Enter address here" autocomplete="off">
+    <label for="user-geocode"><button id="go-to-user-geocode-btn">Go!</button></label>
+    <button id="clear-markers-btn" class="mx-4">Clear All Markers</button>
 </div>
 
 
@@ -38,7 +41,7 @@
     $(function (){
 
         mapboxgl.accessToken = mapBoxExercisesKey;
-        let restaurantMarker = new mapboxgl.Marker();
+        let currentMarkers = [];
         let restaurantPopup = new mapboxgl.Popup().setHTML("China and Thai Cuisine");
         // array of fav restaurants
         let favoriteRestaurants = [
@@ -100,17 +103,18 @@
                 });
         }
         // center map on paris when clicked
-        $("#parisButton").click(function (){
-            geocode("Paris, France", mapBoxExercisesKey).then(function(result) {
+        $("#parisButton").click(() => {
+            geocode("Paris, France", mapBoxExercisesKey).then(result => {
                 console.log(result);
                 map.setCenter(result);
                 map.setZoom(10);
             });
         });
         // show markers of restaurants in favoriteRestaurants array and centers at index 1
-        $("#favorite-restaurant").click(function (){
+        $("#favorite-restaurant").click(() => {
             favoriteRestaurants.forEach((e, i) => {
                 let restaurantMarker = new mapboxgl.Marker();
+                currentMarkers.push(restaurantMarker);
                 let restaurantPopup = new mapboxgl.Popup().setHTML(`
                     <p>${e.name}</p>
                     <p>${e.address}</p>
@@ -120,7 +124,7 @@
                     ${setHTMLImage(e.images)}
                 `);
 
-                geocode(e.address, mapBoxExercisesKey).then(function (result) {
+                geocode(e.address, mapBoxExercisesKey).then(result => {
                     restaurantMarker.setLngLat(result).addTo(map).setPopup(restaurantPopup);
                     map.setZoom(11);
                     i === 1 ? map.setCenter(result) : false;
@@ -128,7 +132,7 @@
             });
         });
         // sets zoom level by user number input
-        $("#set-zoom-btn").click(function() {
+        $("#set-zoom-btn").click(() => {
             let userInput = $("#zoom-level").val();
             if(isNaN(userInput) || typeof userInput === "boolean" || userInput === null || userInput < 1 || userInput > 20) {
                 alert("Zoom Level must be a number between 1-20")
@@ -136,6 +140,22 @@
             } else {
                 map.setZoom(userInput);
             }
+        });
+        // center and add marker on address provided by user on click
+        $("#go-to-user-geocode-btn").click(() => {
+            geocode($("#user-geocode").val(), mapBoxExercisesKey).then(result => {
+                let userMarker = new mapboxgl.Marker();
+                currentMarkers.push(userMarker);
+                userMarker.setLngLat(result).addTo(map);
+                map.setCenter(result);
+                map.setCenter(17);
+            })
+        });
+        // when hide marker button pushed, hides all markers
+        $("#clear-markers-btn").click(() => {
+            currentMarkers.forEach(e => {
+                e.remove();
+            });
         });
         // function to return string of HTML with each image source included in array
         const setHTMLImage = array => {
