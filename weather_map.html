@@ -15,9 +15,11 @@
 
 
 <!--TODO:-->
-<!--Build Navbar with current weather-->
-<!--Make sure it updates when the location is changed-->
-<!--Include current temp, feels like, weather type (scattered clouds, raining, etc)-->
+<!--change header to collapsable navbar?-->
+<!--make options button instead be button that says current weather-->
+<!--    so that when collapsed, easily tell that the current weather-->
+<!--    is hidden behind it-->
+
 <div id="header-container" class="container-fluid bg-dark d-flex flex-row text-light align-items-center pt-1 sticky-top">
     <h2 id="header-title">Current Weather</h2>
     <h3 id="current-icon"class="ms-3"><i class="bi bi-sun"></i></h3>
@@ -26,6 +28,10 @@
     <div id="current-temp-feels-like" class="mx-2 text-muted">Feels Like 99 F</div>
 </div>
 
+<!--TODO:-->
+<!--add col for different window sizes-->
+<!--should be as it is now with large (maybe medium) and up-->
+<!--everything col-12 smaller than that-->
 
 <div id="body-container" class="container mt-3">
     <div class="row gx-3">
@@ -42,33 +48,27 @@
     </div>
     <div class="row gx-2 pt-2">
         <div class="col-3">
-            <div class="card bg-light" style="height: 240px;">
+            <div id="upcoming-2-card" class="card bg-light" style="height: 240px;">
 
             </div>
         </div>
         <div class="col-3">
-            <div class="card bg-light" style="height: 240px;">
+            <div id="upcoming-3-card" class="card bg-light" style="height: 240px;">
 
             </div>
         </div>
         <div class="col-3">
-            <div class="card bg-light" style="height: 240px;">
+            <div id="upcoming-4-card" class="card bg-light" style="height: 240px;">
 
             </div>
         </div>
         <div class="col-3">
-            <div class="card bg-light" style="height: 240px;">
+            <div id="upcoming-5-card" class="card bg-light" style="height: 240px;">
 
             </div>
         </div>
     </div>
 </div>
-<!--Cards for each day in 5 day forecast-->
-
-
-
-<!--Map to switch locations-->
-
 
 
 <!--       Scripts       -->

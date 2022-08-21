@@ -8,7 +8,7 @@ $(() => {
     //
     const displayWeatherData = () => {
         let weatherData;
-        $.get("http://api.openweathermap.org/data/2.5/weather", {
+        $.get("http://api.openweathermap.org/data/2.5/upcoming", {
             APPID: OPEN_WEATHER_APPID,
             q:     "San Antonio, US",
             units: "imperial"
