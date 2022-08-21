@@ -56,6 +56,9 @@ $(() => {
             units: "imperial"
         }).done(data => {
             console.log(data);
+
+                //adding data to "tomorrow" card
+                //should include more data than the rest as it is larger
                 $("#upcoming-tomorrow-card").html(`
                     <div class="card-header">${data.list[7].dt_txt.substring(0, 10)}</div> 
                     <ul class="list-group list-group-flush px-2">
@@ -64,6 +67,9 @@ $(() => {
                         <li class="list-group-item"><img src="http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png"> ${firstLettersCapitalized(data.list[7].weather[0].description)}</li>
                     </ul>
                 `);
+
+                //adding data for the rest of the 5 day forecast
+                //should include minimal data
                 for(let i=2; i<=5; i++) {
                     $(`#upcoming-${i}-card`).html(`
                     <div class="card-header">${data.list[i*8-1].dt_txt.substring(0, 10)}</div> 
