@@ -5,6 +5,16 @@
 
 "use strict"
 $(() => {
+    // functions
+
+    //TODO:
+    // complete this function so that it takes in a string and returns a string with the first letter of each word capitalized
+    const firstLettersCapitalized = string => {
+        return string;
+    }
+
+
+
     // global variables
     mapboxgl.accessToken = MAPBOX_KEY;
 
@@ -31,11 +41,15 @@ $(() => {
         }).done(data => {
             console.log(data);
             $("#current-icon").html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
-            console.log(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
+            $("#current-weather-description").html(firstLettersCapitalized(data.weather[0].description));
+            $("#current-temp").html(`${parseInt(data.main.temp)} F`);
+            $("#current-feels-like").html(`Feels Like ${parseInt(data.main.feels_like)} F`);
         });
     }
 
     displayCurrentWeatherData();
+
+
 
 
 });
