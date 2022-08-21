@@ -57,12 +57,23 @@ $(() => {
         }).done(data => {
             console.log(data);
                 $("#upcoming-tomorrow-card").html(`
-                    <ul>
-                        <li>High: ${highTemp(data, 1)}</li>
-                        <li>Low: ${lowTemp(data, 1)}</li>
-                        <li></li>
+                    <div class="card-header">${data.list[7].dt_txt.substring(0, 10)}</div> 
+                    <ul class="list-group list-group-flush px-2">
+                        <li class="list-group-item">High: ${highTemp(data, 1)}</li>
+                        <li class="list-group-item">Low: ${lowTemp(data, 1)}</li>
+                        <li class="list-group-item"><img src="http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png"> ${firstLettersCapitalized(data.list[7].weather[0].description)}</li>
                     </ul>
                 `);
+                for(let i=2; i<=5; i++) {
+                    $(`#upcoming-${i}-card`).html(`
+                    <div class="card-header">${data.list[i*8-1].dt_txt.substring(0, 10)}</div> 
+                    <ul class="list-group list-group-flush px-2">
+                        <li class="list-group-item">High: ${highTemp(data, i)}</li>
+                        <li class="list-group-item">Low: ${lowTemp(data, i)}</li>
+                        <li class="list-group-item"><img src="http://openweathermap.org/img/w/${data.list[i*8-1].weather[0].icon}.png"> ${firstLettersCapitalized(data.list[i*8-1].weather[0].description)}</li>
+                    </ul>
+                `);
+                }
         });
     }
 
