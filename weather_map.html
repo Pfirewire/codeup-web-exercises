@@ -13,13 +13,63 @@
 </head>
 <body>
 
-<!--Navbar with current weather-->
+
+<!--TODO:-->
+<!--Build Navbar with current weather-->
+<!--Make sure it updates when the location is changed-->
+<!--Include current temp, feels like, weather type (scattered clouds, raining, etc)-->
+<div id="header-container" class="container-fluid bg-dark d-flex flex-row text-light align-items-center pt-1 sticky-top">
+    <h2 id="header-title">Current Weather</h2>
+    <h3 id="current-icon"class="ms-3"><i class="bi bi-sun"></i></h3>
+    <div id="current-weather-status" class="mx-2">Sunny</div>
+    <div id="current-temp" class="mx-2">94 F</div>
+    <div id="current-temp-feels-like" class="mx-2 text-muted">Feels Like 99 F</div>
+</div>
 
 
+<div id="body-container" class="container mt-3">
+    <div class="row gx-3">
+        <div class="col-3">
+            <div id="upcoming-next-day-card" class="card bg-dark" style="height: 500px;">
 
+            </div>
+        </div>
+        <div class="col-9">
+            <div id="map" class="bg-dark " style="height: 500px;">
+
+            </div>
+        </div>
+    </div>
+    <div class="row gx-2 pt-2">
+        <div class="col-3">
+            <div class="card bg-light" style="height: 240px;">
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-light" style="height: 240px;">
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-light" style="height: 240px;">
+
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card bg-light" style="height: 240px;">
+
+            </div>
+        </div>
+    </div>
+</div>
 <!--Cards for each day in 5 day forecast-->
 
+
+
 <!--Map to switch locations-->
+
+
 
 <!--       Scripts       -->
 <!-- jQuery -->
