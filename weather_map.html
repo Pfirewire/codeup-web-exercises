@@ -20,18 +20,40 @@
 
 
 <!--TODO:-->
-<!--change header to collapsable navbar?-->
-<!--make options button instead be button that says current weather-->
-<!--    so that when collapsed, easily tell that the current weather-->
-<!--    is hidden behind it-->
 
-<div id="header-container" class="container-fluid bg-dark d-flex flex-row text-light align-items-center pt-1 sticky-top">
-    <h2 id="header-title">Current Weather</h2>
-    <h3 id="current-icon"class="ms-3"><i class="bi bi-sun"></i></h3>
-    <div id="current-weather-status" class="mx-2">Sunny</div>
-    <div id="current-temp" class="mx-2">94 F</div>
-    <div id="current-temp-feels-like" class="mx-2 text-muted">Feels Like 99 F</div>
-</div>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark text-light sticky-top">
+    <div class="container-fluid">
+        <h2 id="header-title" class="nav-item mx-3">WeatherMap</h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span id="collapse-btn">Current Weather</span>
+        </button>
+        <div class="collapse navbar-collapse me-auto mb-2 mb-md-0" id="navbarNav">
+            <ul class="navbar-nav">
+                <li id="current-icon" class="nav-item">
+                    <h3><i class="bi bi-sun"></i></h3>
+                </li>
+                <li id="current-weather-description" class="nav-item m-auto mx-2">
+                    <h4 class="navbar-text">Sunny</h4>
+                </li>
+                <li id="current-temp" class="nav-item m-auto mx-2">
+                    <h4 class="navbar-text">94 F</h4>
+                </li>
+                <li id="current-feels-like" class="nav-item m-auto mx-2 text-muted">
+                    <h4 class="navbar-text">Feels Like 97 F</h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--<div id="header-container" class="container-fluid bg-dark d-flex flex-row text-light align-items-center pt-1 sticky-top">-->
+<!--    <h2 id="header-title">Current Weather</h2>-->
+<!--    <h3 id="current-icon"class="ms-3"><i class="bi bi-sun"></i></h3>-->
+<!--    <div id="current-weather-status" class="mx-2">Sunny</div>-->
+<!--    <div id="current-temp" class="mx-2">94 F</div>-->
+<!--    <div id="current-temp-feels-like" class="mx-2 text-muted">Feels Like 99 F</div>-->
+<!--</div>-->
 
 <!--TODO:-->
 <!--add col for different window sizes-->
