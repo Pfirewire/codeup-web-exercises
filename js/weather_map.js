@@ -7,12 +7,8 @@
 $(() => {
     // functions
 
-    //TODO:
-    // complete this function so that it takes in a string and returns a string with the first letter of each word capitalized
-    const firstLettersCapitalized = string => {
-        return string;
-    }
-
+    // takes in string and returns same string with the first letters of each word capitalized
+    const firstLettersCapitalized = string => string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 
 
     // global variables
