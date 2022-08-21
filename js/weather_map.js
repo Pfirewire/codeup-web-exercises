@@ -5,16 +5,32 @@
 
 "use strict"
 $(() => {
+    // global variables
+    mapboxgl.accessToken = MAPBOX_KEY;
+
+
+    // create map
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [-98.48954479592629, 29.42675986019988], // starting position [lng, lat]
+        zoom: 17, // starting zoom
+        projection: 'globe' // display the map as a 3D globe
+    });
+    map.on('style.load', () => {
+        map.setFog({}); // Set the default atmosphere style
+    });
+
     //
     const displayWeatherData = () => {
         let weatherData;
-        $.get("http://api.openweathermap.org/data/2.5/upcoming", {
+        $.get("http://api.openweathermap.org/data/2.5/forecast", {
             APPID: OPEN_WEATHER_APPID,
             q:     "San Antonio, US",
             units: "imperial"
         }).done(data => {
             console.log(data);
-            console.log(`It is ${data.main.temp} degrees Fahrenheit outside, but it feels like ${data.main.feels_like}`);
+            // console.log(`It is ${data.main.temp} degrees Fahrenheit outside, but it feels like ${data.main.feels_like}`);
         });
     }
 
@@ -22,3 +38,5 @@ $(() => {
 
 
 });
+
+//
