@@ -22,19 +22,20 @@ $(() => {
     });
 
     //
-    const displayWeatherData = () => {
+    const displayCurrentWeatherData = () => {
         let weatherData;
-        $.get("http://api.openweathermap.org/data/2.5/forecast", {
+        $.get("http://api.openweathermap.org/data/2.5/weather", {
             APPID: OPEN_WEATHER_APPID,
             q:     "San Antonio, US",
             units: "imperial"
         }).done(data => {
             console.log(data);
-            // console.log(`It is ${data.main.temp} degrees Fahrenheit outside, but it feels like ${data.main.feels_like}`);
+            $("#current-icon").html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
+            console.log(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
         });
     }
 
-    displayWeatherData();
+    displayCurrentWeatherData();
 
 
 });
