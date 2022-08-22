@@ -14,18 +14,42 @@ $(() => {
     const prettyDate = dateString => {
         let month;
         switch (dateString.substring(5, 7)) {
-            case "01": month = "January";
-            case "02": month = "February";
-            case "03": month = "March";
-            case "04": month = "April";
-            case "05": month = "May";
-            case "06": month = "June";
-            case "07": month = "July";
-            case "08": month = "August";
-            case "09": month = "September";
-            case "10": month = "October";
-            case "11": month = "November";
-            case "12": month = "December";
+            case "01":
+                month = "January";
+                break;
+            case "02":
+                month = "February";
+                break;
+            case "03":
+                month = "March";
+                break;
+            case "04":
+                month = "April";
+                break;
+            case "05":
+                month = "May";
+                break;
+            case "06":
+                month = "June";
+                break;
+            case "07":
+                month = "July";
+                break;
+            case "08":
+                month = "August";
+                break;
+            case "09":
+                month = "September";
+                break;
+            case "10":
+                month = "October";
+                break;
+            case "11":
+                month = "November";
+                break;
+            case "12":
+                month = "December";
+                break;
         }
         return `${month} ${dateString.substring(8, dateString.length)}, ${dateString.substring(0, 4)}`;
     }
@@ -48,7 +72,7 @@ $(() => {
             lon: lng,
             units: "imperial"
         }).done(data => {
-            console.log(data);
+            // console.log(data);
             $("#header-title").html(data.name);
             $("#current-icon").html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
             $("#current-weather-description").html(firstLettersCapitalized(data.weather[0].description));
@@ -88,12 +112,12 @@ $(() => {
             lon: lng,
             units: "imperial"
         }).done(data => {
-            console.log(data);
+            // console.log(data);
 
             //adding data to "tomorrow" card
             //should include more data than the rest as it is larger
             $("#upcoming-tomorrow-card").html(`
-                <div class="card-header">${prettyDate(data.list[7].dt_txt.substring(0, 10))}</div> 
+                <div class="card-header">Tomorrow's Forecast</div> 
                 <ul class="list-group list-group-flush px-2">
                     <li class="list-group-item">High: ${highTemp(data, 1)}&#8457;</li>
                     <li class="list-group-item">Low: ${lowTemp(data, 1)}&#8457;</li>
@@ -156,11 +180,6 @@ $(() => {
         updateMarker([marker.getLngLat().lng, marker.getLngLat().lat]);
     }
 
-    // calls updateMarker
-    const mapClick = (e) => {
-        console.log(e);
-    }
-
 
 
     // ------------ GLOBAL VARIABLES ------------
@@ -186,6 +205,13 @@ $(() => {
 
     //initial display weather data in San Antonio
     changeAddress("San Antonio, Texas");
+
+    // acts like address-btn is clicked when user hits 'enter' while selected in the input-address input box
+    $("#input-address").keyup((e) => {
+        if (e.keyCode === 13) {
+            $("#address-btn").click();
+        }
+    });
 
     // change city to user entered city when address-btn pressed
     $("#address-btn").click(() => {
