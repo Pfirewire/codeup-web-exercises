@@ -33,7 +33,6 @@ $(() => {
     // takes timestamp, returns readable local time string
     const localTime = timestamp => {
         let date = new Date((timestamp) * 1000);
-        console.log(date.getHours());
         if (date.getHours() < 12) {
             return `${date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} AM`;
         } else {
@@ -142,21 +141,42 @@ $(() => {
             map.setCenter(result);
             map.setZoom(9);
             updateMarker(result);
-            displayCurrentWeatherData(result[1], result[0]);
-            displayForecast(result[1], result[0]);
         });
     }
 
     // updates marker
-    const updateMarker = result => {
-        marker.setLngLat(result).addTo(map);
+    const updateMarker = coords => {
+        marker.setLngLat(coords).addTo(map);
+        displayCurrentWeatherData(coords[1], coords[0]);
+        displayForecast(coords[1], coords[0]);
+    }
+
+    // calls updateMarker with correct lng/lat array input
+    const markerDragEnd = () => {
+        updateMarker([marker.getLngLat().lng, marker.getLngLat().lat]);
+    }
+
+    // calls updateMarker
+    const mapClick = (e) => {
+        console.log(e);
     }
 
 
 
     // ------ GLOBAL VARIABLES ------
     mapboxgl.accessToken = MAPBOX_KEY;
-    let marker = new mapboxgl.Marker();
+
+    // setting marker
+    let marker = new mapboxgl.Marker({
+        draggable: true
+    });
+    // let markerElement = document.createElement('div');
+    // markerElement.id = 'marker';
+    // let marker = new mapboxgl.Marker({
+    //     element: markerElement,
+    //     draggable: true
+    // });
+
 
     // create map
     const map = new mapboxgl.Map({
@@ -179,4 +199,11 @@ $(() => {
         $("#input-address").val("");
     });
 
+    // call markerDragEnd when marker has been dragged
+    marker.on("dragend", markerDragEnd);
+
+    // calls updateMarker when user clicks on map
+    map.on("click", (e) => {
+        updateMarker([e.lngLat.lng, e.lngLat.lat]);
+    });
 });
