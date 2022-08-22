@@ -10,6 +10,26 @@ $(() => {
     // takes in string and returns same string with the first letters of each word capitalized
     const firstLettersCapitalized = string => string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 
+    // takes date string format yyyy-mm-dd and returns {month name} dd, yyyy format
+    const prettyDate = dateString => {
+        let month;
+        switch (dateString.substring(5, 7)) {
+            case "01": month = "January";
+            case "02": month = "February";
+            case "03": month = "March";
+            case "04": month = "April";
+            case "05": month = "May";
+            case "06": month = "June";
+            case "07": month = "July";
+            case "08": month = "August";
+            case "09": month = "September";
+            case "10": month = "October";
+            case "11": month = "November";
+            case "12": month = "December";
+        }
+        return `${month} ${dateString.substring(8, dateString.length)}, ${dateString.substring(0, 4)}`;
+    }
+
     //gets weather data from WeatherMap and displays in navbar
     const displayCurrentWeatherData = () => {
         $.get("http://api.openweathermap.org/data/2.5/weather", {
@@ -60,10 +80,10 @@ $(() => {
                 //adding data to "tomorrow" card
                 //should include more data than the rest as it is larger
                 $("#upcoming-tomorrow-card").html(`
-                    <div class="card-header">${data.list[7].dt_txt.substring(0, 10)}</div> 
+                    <div class="card-header">${prettyDate(data.list[7].dt_txt.substring(0, 10))}</div> 
                     <ul class="list-group list-group-flush px-2">
-                        <li class="list-group-item">High: ${highTemp(data, 1)}</li>
-                        <li class="list-group-item">Low: ${lowTemp(data, 1)}</li>
+                        <li class="list-group-item">High: ${highTemp(data, 1)}&#8457;</li>
+                        <li class="list-group-item">Low: ${lowTemp(data, 1)}&#8457;</li>
                         <li class="list-group-item"><img src="http://openweathermap.org/img/w/${data.list[7].weather[0].icon}.png"> ${firstLettersCapitalized(data.list[7].weather[0].description)}</li>
                     </ul>
                 `);
@@ -72,10 +92,9 @@ $(() => {
                 //should include minimal data
                 for(let i=2; i<=5; i++) {
                     $(`#upcoming-${i}-card`).html(`
-                    <div class="card-header">${data.list[i*8-1].dt_txt.substring(0, 10)}</div> 
+                    <div class="card-header">${prettyDate(data.list[i*8-1].dt_txt.substring(0, 10))}</div> 
                     <ul class="list-group list-group-flush px-2">
-                        <li class="list-group-item">High: ${highTemp(data, i)}</li>
-                        <li class="list-group-item">Low: ${lowTemp(data, i)}</li>
+                        <li class="list-group-item">${highTemp(data, i)}&#8457; / ${lowTemp(data, i)}&#8457;</li>
                         <li class="list-group-item"><img src="http://openweathermap.org/img/w/${data.list[i*8-1].weather[0].icon}.png"> ${firstLettersCapitalized(data.list[i*8-1].weather[0].description)}</li>
                     </ul>
                 `);
