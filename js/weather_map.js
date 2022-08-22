@@ -5,7 +5,7 @@
 
 "use strict"
 $(() => {
-    // functions
+    // ------ FUNCTIONS ------
 
     // takes in string and returns same string with the first letters of each word capitalized
     const firstLettersCapitalized = string => string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
@@ -37,18 +37,20 @@ $(() => {
         if (date.getHours() < 12) {
             return `${date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} AM`;
         } else {
-            return ``;
+            return `${(date.getHours()-12).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} PM`;
         }
     }
 
     //gets weather data from WeatherMap and displays in navbar
-    const displayCurrentWeatherData = () => {
+    const displayCurrentWeatherData = (lat, lng) => {
         $.get("http://api.openweathermap.org/data/2.5/weather", {
             APPID: OPEN_WEATHER_APPID,
-            q:     "San Antonio, US",
+            lat: lat,
+            lon: lng,
             units: "imperial"
         }).done(data => {
             console.log(data);
+            $("#header-title").html(data.name);
             $("#current-icon").html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
             $("#current-weather-description").html(firstLettersCapitalized(data.weather[0].description));
             $("#current-temp").html(`${parseInt(data.main.temp)} F`);
@@ -80,10 +82,11 @@ $(() => {
     }
 
     //gets forecast from WeatherMap and displays 5 day forecast on page
-    const displayForecast = () => {
+    const displayForecast = (lat, lng) => {
         $.get("http://api.openweathermap.org/data/2.5/forecast", {
             APPID: OPEN_WEATHER_APPID,
-            q:     "San Antonio, US",
+            lat: lat,
+            lon: lng,
             units: "imperial"
         }).done(data => {
             console.log(data);
@@ -121,27 +124,59 @@ $(() => {
         });
     }
 
-    // global variables
-    mapboxgl.accessToken = MAPBOX_KEY;
+    // returns longitude and latitude
+    const geocode = (search, token) => {
+        var baseUrl = 'https://api.mapbox.com';
+        var endPoint = '/geocoding/v5/mapbox.places/';
+        return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+            .then(function(res) {
+                return res.json();
+            }).then(function(data) {
+                return data.features[0].center;
+            });
+    }
 
+    // takes address string and updates map, current weather info, and forecast cards
+    const changeAddress = address => {
+        geocode(address, MAPBOX_KEY).then(result => {
+            map.setCenter(result);
+            map.setZoom(9);
+            updateMarker(result);
+            displayCurrentWeatherData(result[1], result[0]);
+            displayForecast(result[1], result[0]);
+        });
+    }
+
+    // updates marker
+    const updateMarker = result => {
+        marker.setLngLat(result).addTo(map);
+    }
+
+
+
+    // ------ GLOBAL VARIABLES ------
+    mapboxgl.accessToken = MAPBOX_KEY;
+    let marker = new mapboxgl.Marker();
 
     // create map
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-98.48954479592629, 29.42675986019988], // starting position [lng, lat]
-        zoom: 17, // starting zoom
+        center: [-98.4946, 29.4252], // starting position [lng, lat]
+        zoom: 9, // starting zoom
         projection: 'globe' // display the map as a 3D globe
     });
     map.on('style.load', () => {
         map.setFog({}); // Set the default atmosphere style
     });
 
+    //initial display weather data in San Antonio
+    displayCurrentWeatherData(29.4252, -98.4946);
+    displayForecast(29.4252, -98.4946);
 
-
-
-    //display weather data
-    displayCurrentWeatherData();
-    displayForecast();
+    // change city to user entered city when address-btn pressed
+    $("#address-btn").click(() => {
+        changeAddress($("#input-address").val());
+    });
 
 });
