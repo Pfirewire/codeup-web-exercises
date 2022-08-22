@@ -5,7 +5,7 @@
 
 "use strict"
 $(() => {
-    // ------ FUNCTIONS ------
+    // ------------ FUNCTIONS ------------
 
     // takes in string and returns same string with the first letters of each word capitalized
     const firstLettersCapitalized = string => string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
@@ -163,22 +163,16 @@ $(() => {
 
 
 
-    // ------ GLOBAL VARIABLES ------
+    // ------------ GLOBAL VARIABLES ------------
+
     mapboxgl.accessToken = MAPBOX_KEY;
 
     // setting marker
     let marker = new mapboxgl.Marker({
         draggable: true
     });
-    // let markerElement = document.createElement('div');
-    // markerElement.id = 'marker';
-    // let marker = new mapboxgl.Marker({
-    //     element: markerElement,
-    //     draggable: true
-    // });
 
-
-    // create map
+    // create map centered on San Antonio
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
