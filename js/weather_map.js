@@ -171,12 +171,12 @@ $(() => {
     });
 
     //initial display weather data in San Antonio
-    displayCurrentWeatherData(29.4252, -98.4946);
-    displayForecast(29.4252, -98.4946);
+    changeAddress("San Antonio, Texas");
 
     // change city to user entered city when address-btn pressed
     $("#address-btn").click(() => {
         changeAddress($("#input-address").val());
+        $("#input-address").val("");
     });
 
 });
