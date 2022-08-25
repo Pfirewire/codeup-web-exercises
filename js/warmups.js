@@ -6,10 +6,13 @@ $(() => {
 
     const longestString = array => {
         let longestString = array[0];
-        array.forEach(e => {
-            e.length > longestString.length ? longestString = e : false;
-        });
+        for(let i = 0; i < array.length; i++) {
+            if (typeof array[i] !== "string"){
+                return false;
+            }
+            array[i].length > longestString.length ? longestString = array[i] : false;
+        }
         return longestString;
     }
-    console.log(`The longest string in the array ["hello", "my", "name", "is", "Constantine"] is: ${longestString(["hello", "my", "name", "is", "Constantine"])}`)
+    console.log(`The longest string in the array ["hello", "my", "name", "is", "Constantine"] is: ${longestString(["hello", "my", "name", "is", "Constantine"])}`);
 });
