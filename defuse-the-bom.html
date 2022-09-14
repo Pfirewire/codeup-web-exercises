@@ -17,9 +17,7 @@
     var detonationTimer = 5;
 
     // TODO: This function needs to be called once every second
-    let bombCountdown = setInterval(function (){updateTimer()}, 1000);
-
-    function updateTimer() {
+    let bombCountdown = setInterval(() => {
         if (detonationTimer == 0) {
             alert('EXTERMINATE!');
             document.body.innerHTML = '';
@@ -28,7 +26,7 @@
             document.getElementById('timer').innerHTML = detonationTimer;
         }
         detonationTimer--;
-    }
+    }, 1000);
 
     // TODO: When this function runs, it needs to
     // cancel the interval/timeout for updateTimer()
