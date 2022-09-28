@@ -84,7 +84,7 @@ $(() => {
 
     //find high temp from weathermap, inputting data list of 3 hour interval weather data and amount of days from today
     const highTemp = (data, day) => {
-        let highTemp = 0;
+        let highTemp = -1000;
         for(let i=0; i<8; i++) {
             if(highTemp < data.list[i + (day*8) - 8].main.temp_max) {
                 highTemp = data.list[i + (day*8) - 8].main.temp_max;
@@ -134,7 +134,7 @@ $(() => {
             //should include minimal data
             for(let i=2; i<=5; i++) {
                 $(`#upcoming-${i}-card`).html(`
-                    <div class="card-header">${prettyDate(data.list[i*8-1].dt_txt.substring(0, 10))}</div> 
+                    <div class="card-header">${prettyDate(data.list[i*8-1].dt_txt.substring(0, 10))}</div>
                     <ul class="list-group list-group-flush px-2">
                         <li class="list-group-item">${highTemp(data, i)}&#8457; / ${lowTemp(data, i)}&#8457;</li>
                         <li class="list-group-item"><img src="http://openweathermap.org/img/w/${data.list[i*8-1].weather[0].icon}.png"> ${firstLettersCapitalized(data.list[i*8-1].weather[0].description)}</li>
