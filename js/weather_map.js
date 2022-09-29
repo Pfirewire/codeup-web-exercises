@@ -2,12 +2,10 @@
 $(() => {
 
     // ------------ GLOBAL VARIABLES ------------
-
     let map;
     let marker;
 
     // ------------ Objects ------------
-
     // Map object and methods
     const Map = {
         // initializes map and marker global variables
@@ -39,7 +37,6 @@ $(() => {
             Get.forecast(coords[1], coords[0]);
         }
     };
-
     // Get object and methods
     const Get = {
         // get forecast data then print to screen
@@ -81,7 +78,6 @@ $(() => {
                 });
         }
     };
-
     // Print object and methods
     const Print = {
         // receives forecast data and prints tomorrow card to screen
@@ -125,7 +121,6 @@ $(() => {
             $("#current-humidity").html(`${data.main.humidity}% Humidity`)
         }
     }
-
     // Pretty object and methods
     const Pretty = {
         // receives string and returns same string with first letters of each word capitalized
@@ -185,7 +180,6 @@ $(() => {
             }
         }
     }
-
     // Deduce object and methods
     const Deduce = {
         // receives forecast weather and day, returns high temp
@@ -209,7 +203,6 @@ $(() => {
             return parseInt(lowTemp);
         }
     }
-
     // User object and methods
     const User = {
         // receives address string and gets coordinates then updates weather info and prints cards
@@ -221,7 +214,6 @@ $(() => {
             });
         }
     }
-
     // Event object and methods
     const Event = {
         // sets up event listener for button click as well as enter input in search bar
@@ -252,9 +244,9 @@ $(() => {
         }
     }
 
+    // ------------ INITIALIZING AND EVENT LISTENERS ------------
     // Initialize Map
     Map.initialize();
-
     // Add Event Listeners
     Event.checkForSearch();
     Event.checkForMarkerDrag();
