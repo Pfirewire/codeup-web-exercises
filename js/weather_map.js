@@ -6,10 +6,14 @@ $(() => {
     let marker;
 
     // ------------ OBJECTS ------------
+
+    // DO NOT USE ARROW FUNCTIONS IN METHODS
+    // THEY CANNOT USE THE THIS. FUNCTIONALITY
+
     // Map object and methods
     const Map = {
         // initializes map and marker global variables
-        initialize: () => {
+        initialize() {
             // Access Token
             mapboxgl.accessToken = MAPBOX_KEY;
             // Create Map
@@ -31,7 +35,7 @@ $(() => {
             User.searchAddress("San Antonio, Texas");
         },
         // updates marker based on coordinates
-        updateMarker: coords => {
+        updateMarker(coords) {
             marker.setLngLat(coords).addTo(map);
             Get.currentWeather(coords[1], coords[0]);
             Get.forecast(coords[1], coords[0]);
@@ -40,7 +44,7 @@ $(() => {
     // Get object and methods
     const Get = {
         // get forecast data then print to screen
-        forecast: (lat, lng) => {
+        forecast(lat, lng) {
             // get request for forecast data
             $.get("http://api.openweathermap.org/data/2.5/forecast", {
                 APPID: OPEN_WEATHER_APPID,
@@ -54,7 +58,7 @@ $(() => {
             });
         },
         // get current weather data then print to screen
-        currentWeather: (lat, lng) => {
+        currentWeather(lat, lng) {
             // get request for current weather data
             $.get("http://api.openweathermap.org/data/2.5/weather", {
                 APPID: OPEN_WEATHER_APPID,
@@ -67,7 +71,7 @@ $(() => {
             });
         },
         // get and return coordinates from search query
-        geocode: (search, token) => {
+        geocode(search, token) {
             let baseUrl = 'https://api.mapbox.com';
             let endPoint = '/geocoding/v5/mapbox.places/';
             return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
@@ -81,7 +85,7 @@ $(() => {
     // Print object and methods
     const Print = {
         // receives forecast data and prints tomorrow card to screen
-        tomorrowCard: data => {
+        tomorrowCard(data) {
             $("#upcoming-tomorrow-card").html(`
                 <div class="card-header">Tomorrow's Forecast</div> 
                 <ul class="list-group list-group-flush px-2">
@@ -97,7 +101,7 @@ $(() => {
             `);
         },
         // receives forecast data and prints upcoming cards to screen
-        upcomingCards: data => {
+        upcomingCards(data) {
             for(let i=2; i<=5; i++) {
                 $(`#upcoming-${i}-card`).html(`
                     <div class="card-header">${Pretty.date(data.list[i*8-1].dt_txt.substring(0, 10))}</div>
@@ -112,7 +116,7 @@ $(() => {
             }
         },
         // receives current weather data and prints navbar to screen
-        currentNavbar: data => {
+        currentNavbar(data) {
             $("#header-title").html(data.name);
             $("#current-icon").html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
             $("#current-weather-description").html(Pretty.capitalizeFirstLetters(data.weather[0].description));
@@ -124,11 +128,11 @@ $(() => {
     // Pretty object and methods
     const Pretty = {
         // receives string and returns same string with first letters of each word capitalized
-        capitalizeFirstLetters: str => {
+        capitalizeFirstLetters(str) {
             return str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
         },
         // receives date as numerical string and returns "{month name} dd, yyyy" format
-        date: date => {
+        date(date) {
             let month;
             switch (date.substring(5, 7)) {
                 case "01":
@@ -171,7 +175,7 @@ $(() => {
             return `${month} ${date.substring(8, date.length)}, ${date.substring(0, 4)}`;
         },
         // receives timestamp and returns readable local time string
-        time: timestamp => {
+        time(timestamp) {
             let date = new Date((timestamp) * 1000);
             if (date.getHours() < 12) {
                 return `${date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} AM`;
@@ -183,7 +187,7 @@ $(() => {
     // Deduce object and methods
     const Deduce = {
         // receives forecast weather and day, returns high temp
-        highTemp: (data, day) => {
+        highTemp(data, day) {
             let highTemp = -1000;
             for(let i=0; i<8; i++) {
                 if(highTemp < data.list[i + (day*8) - 8].main.temp_max) {
@@ -193,7 +197,7 @@ $(() => {
             return parseInt(highTemp);
         },
         // receives forecast weather and day, returns low temp
-        lowTemp: (data, day) => {
+        lowTemp(data, day) {
             let lowTemp = 1000;
             for(let i=0; i<8; i++) {
                 if(lowTemp > data.list[i + (day*8) - 8].main.temp_min) {
@@ -206,7 +210,7 @@ $(() => {
     // User object and methods
     const User = {
         // receives address string and gets coordinates then updates weather info and prints cards
-        searchAddress: address => {
+        searchAddress(address) {
             Get.geocode(address, MAPBOX_KEY).then(result => {
                 map.setCenter(result);
                 map.setZoom(9);
@@ -217,7 +221,7 @@ $(() => {
     // Event object and methods
     const Event = {
         // sets up event listener for button click as well as enter input in search bar
-        checkForSearch: () => {
+        checkForSearch() {
             // checking for "enter" input
             $("#input-address").keyup((e) => {
                 if (e.keyCode === 13) {
@@ -231,13 +235,13 @@ $(() => {
             });
         },
         // sets up event listener for marker drag and updates marker on drag end
-        checkForMarkerDrag: () => {
+        checkForMarkerDrag() {
             marker.on("dragend", () => {
                 Map.updateMarker([marker.getLngLat().lng, marker.getLngLat().lat]);
             });
         },
         // sets up event listener for click on a map and updates marker
-        checkForMapClick: () => {
+        checkForMapClick() {
             map.on("click", (e) => {
                 Map.updateMarker([e.lngLat.lng, e.lngLat.lat]);
             });
