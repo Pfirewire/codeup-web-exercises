@@ -1,58 +1,74 @@
-// current goal
-// Using HTML, CSS, jQuery, AJAX, and the OpenWeatherMap API, start by showing the
-// current conditions for city you live in on your page.
-
-
 "use strict"
 $(() => {
 
     // ------------ GLOBAL VARIABLES ------------
 
-    // Access Token
-    mapboxgl.accessToken = MAPBOX_KEY;
-    // Create Map
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-98.4946, 29.4252], // starting position [lng, lat]
-        zoom: 9, // starting zoom
-        projection: 'globe' // display the map as a 3D globe
-    });
-    map.on('style.load', () => {
-        map.setFog({}); // Set the default atmosphere style
-    });
-    // Create Marker
+    let map;
+    let marker;
 
-    const marker = new mapboxgl.Marker({
-        draggable: true
-    });
+    // ------------ Objects ------------
 
+    // Map object and methods
+    const Map = {
+        // initializes map and marker global variables
+        initializeMap: () => {
+            // Access Token
+            mapboxgl.accessToken = MAPBOX_KEY;
+            // Create Map
+            map = new mapboxgl.Map({
+                container: 'map', // container ID
+                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                center: [-98.4946, 29.4252], // starting position [lng, lat]
+                zoom: 9, // starting zoom
+                projection: 'globe' // display the map as a 3D globe
+            });
+            map.on('style.load', () => {
+                map.setFog({}); // Set the default atmosphere style
+            });
+            // Create Marker
+            marker = new mapboxgl.Marker({
+                draggable: true
+            });
+        },
+        // updates marker based on coordinates
+        updateMarker: coords => {
+            marker.setLngLat(coords).addTo(map);
+            Get.currentWeather(coords[1], coords[0]);
+            Get.forecast(coords[1], coords[0]);
+        }
+    };
+
+    // Get object and methods
     const Get = {
+        // get forecast data then print to screen
         forecast: (lat, lng) => {
-            // Get request for forecast data
+            // get request for forecast data
             $.get("http://api.openweathermap.org/data/2.5/forecast", {
                 APPID: OPEN_WEATHER_APPID,
                 lat: lat,
                 lon: lng,
                 units: "imperial"
+            // takes data received and prints to screen
             }).done(data => {
-                // Print data
                 Print.tomorrowCard(data);
                 Print.upcomingCards(data);
             });
         },
+        // get current weather data then print to screen
         currentWeather: (lat, lng) => {
+            // get request for current weather data
             $.get("http://api.openweathermap.org/data/2.5/weather", {
                 APPID: OPEN_WEATHER_APPID,
                 lat: lat,
                 lon: lng,
                 units: "imperial"
+            // takes data received and prints to screen
             }).done(data => {
                 Print.currentNavbar(data)
             });
         },
+        // get and return coordinates from search query
         geocode: (search, token) => {
-            // returns longitude and latitude
             let baseUrl = 'https://api.mapbox.com';
             let endPoint = '/geocoding/v5/mapbox.places/';
             return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
@@ -64,10 +80,10 @@ $(() => {
         }
     };
 
+    // Print object and methods
     const Print = {
+        // receives forecast data and prints tomorrow card to screen
         tomorrowCard: data => {
-            //adding data to "tomorrow" card
-            //should include more data than the rest as it is larger
             $("#upcoming-tomorrow-card").html(`
                 <div class="card-header">Tomorrow's Forecast</div> 
                 <ul class="list-group list-group-flush px-2">
@@ -82,6 +98,7 @@ $(() => {
                 </ul>
             `);
         },
+        // receives forecast data and prints upcoming cards to screen
         upcomingCards: data => {
             for(let i=2; i<=5; i++) {
                 $(`#upcoming-${i}-card`).html(`
@@ -96,6 +113,7 @@ $(() => {
                 `);
             }
         },
+        // receives current weather data and prints navbar to screen
         currentNavbar: data => {
             $("#header-title").html(data.name);
             $("#current-icon").html(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png">`);
@@ -106,13 +124,14 @@ $(() => {
         }
     }
 
+    // Pretty object and methods
     const Pretty = {
+        // receives string and returns same string with first letters of each word capitalized
         capitalizeFirstLetters: str => {
-            // takes in string and returns same string with the first letters of each word capitalized
-            return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+            return str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
         },
+        // receives date as numerical string and returns "{month name} dd, yyyy" format
         date: date => {
-            // takes date string format yyyy-mm-dd and returns {month name} dd, yyyy format
             let month;
             switch (date.substring(5, 7)) {
                 case "01":
@@ -154,8 +173,8 @@ $(() => {
             }
             return `${month} ${date.substring(8, date.length)}, ${date.substring(0, 4)}`;
         },
+        // receives timestamp and returns readable local time string
         time: timestamp => {
-            // takes timestamp, returns readable local time string
             let date = new Date((timestamp) * 1000);
             if (date.getHours() < 12) {
                 return `${date.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} AM`;
@@ -165,8 +184,9 @@ $(() => {
         }
     }
 
+    // Deduce object and methods
     const Deduce = {
-        //find high temp from weathermap, inputting data list of 3 hour interval weather data and amount of days from today
+        // receives forecast weather and day, returns high temp
         highTemp: (data, day) => {
             let highTemp = -1000;
             for(let i=0; i<8; i++) {
@@ -176,8 +196,8 @@ $(() => {
             }
             return parseInt(highTemp);
         },
+        // receives forecast weather and day, returns low temp
         lowTemp: (data, day) => {
-            //find low temp from weathermap, inputting data list of 3 hour interval weather data and amount of days from today
             let lowTemp = 1000;
             for(let i=0; i<8; i++) {
                 if(lowTemp > data.list[i + (day*8) - 8].main.temp_min) {
@@ -188,70 +208,55 @@ $(() => {
         }
     }
 
+    // User object and methods
     const User = {
+        // receives address string and gets coordinates then updates weather info and prints cards
         searchAddress: address => {
-            // takes address string and updates map, current weather info, and forecast cards
             Get.geocode(address, MAPBOX_KEY).then(result => {
                 map.setCenter(result);
                 map.setZoom(9);
-                MyMap.Marker.update(result);
+                Map.updateMarker(result);
             });
         }
     }
 
+    // Event object and methods
     const Event = {
+        // sets up event listener for button click as well as enter input in search bar
         checkForSearch: () => {
-            // acts like address-btn is clicked when user hits 'enter' while selected in the input-address input box
+            // checking for "enter" input
             $("#input-address").keyup((e) => {
                 if (e.keyCode === 13) {
                     $("#address-btn").click();
                 }
             });
-
-            // change city to user entered city when address-btn pressed
+            // checking for search button click
             $("#address-btn").click(() => {
                 User.searchAddress($("#input-address").val());
                 $("#input-address").val("");
             });
+        },
+        // sets up event listener for marker drag and updates marker on drag end
+        checkForMarkerDrag: () => {
+            marker.on("dragend", () => {
+                Map.updateMarker([marker.getLngLat().lng, marker.getLngLat().lat]);
+            });
+        },
+        // sets up event listener for click on a map and updates marker
+        checkForMapClick: () => {
+            map.on("click", (e) => {
+                Map.updateMarker([e.lngLat.lng, e.lngLat.lat]);
+            });
         }
     }
 
-    const MyMap = {
-        Marker: {
-            update: (coords, marker) => {
-                // Updates marker location with coordinates
-                marker.setLngLat(coords).addTo(map);
-                Get.currentWeather(coords[1], coords[0]);
-                Get.forecast(coords[1], coords[0]);
-            },
-            dragEnd: marker => {
-                MyMap.Marker.update([marker.getLngLat().lng, marker.getLngLat().lat], marker);
-            },
-            createDraggable: () => {
-
-                return marker;
-            }
-        }
-    }
-
-
-
-
-
-
-
-    //initial display weather data in San Antonio
+    // Initialize Map and center on San Antonio
+    Map.initializeMap();
     User.searchAddress("San Antonio, Texas");
 
+    // Add Event Listeners
     Event.checkForSearch();
+    Event.checkForMarkerDrag();
+    Event.checkForMapClick();
 
-
-
-    // call MyMap.Marker.dragEnd when marker has been dragged
-    marker.on("dragend", MyMap.Marker.dragEnd(marker));
-
-    // calls MyMap.Marker.update when user clicks on map
-    map.on("click", (e) => {
-        MyMap.Marker.update([e.lngLat.lng, e.lngLat.lat]);
-    });
 });
