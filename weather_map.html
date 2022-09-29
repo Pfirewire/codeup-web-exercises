@@ -20,7 +20,7 @@
 </head>
 <body>
 
-
+<!--Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light sticky-top">
     <div class="container-fluid">
         <h2 id="header-title" class="nav-item mx-3">WeatherMap</h2>
@@ -49,41 +49,33 @@
     </div>
 </nav>
 
-
-
+<!--Body-->
 <div id="body-container" class="container-fluid mt-3">
     <div class="row gx-3 flex-row-reverse">
+<!--        Map-->
         <div class="col-12 col-lg-9">
-            <div id="map" style="height: 500px;">
-
-            </div>
+            <div id="map" style="height: 500px;"></div>
         </div>
+<!--        Search Bar and Tomorrow Card-->
         <div class="col-12 col-lg-3 container d-flex flex-column">
             <input id="input-address" placeholder="Address" autocomplete="off">
             <button id="address-btn" class="btn btn-info mt-1 mb-3">Check Weather</button>
             <div id="upcoming-tomorrow-card" class="card bg-light text-center flex-grow-1"></div>
         </div>
     </div>
+<!--    Upcoming Cards-->
     <div class="row gx-2 pt-2">
         <div class="col-6 col-lg-3">
-            <div id="upcoming-2-card" class="card bg-dark text-light text-center mb-2">
-
-            </div>
+            <div id="upcoming-2-card" class="card bg-dark text-light text-center mb-2"></div>
         </div>
         <div class="col-6 col-lg-3">
-            <div id="upcoming-3-card" class="card bg-dark text-light text-center mb-2">
-
-            </div>
+            <div id="upcoming-3-card" class="card bg-dark text-light text-center mb-2"></div>
         </div>
         <div class="col-6 col-lg-3">
-            <div id="upcoming-4-card" class="card bg-dark text-light text-center mb-2">
-
-            </div>
+            <div id="upcoming-4-card" class="card bg-dark text-light text-center mb-2"></div>
         </div>
         <div class="col-6 col-lg-3">
-            <div id="upcoming-5-card" class="card bg-dark text-light text-center mb-2">
-
-            </div>
+            <div id="upcoming-5-card" class="card bg-dark text-light text-center mb-2"></div>
         </div>
     </div>
 </div>

@@ -11,7 +11,7 @@ $(() => {
     // Map object and methods
     const Map = {
         // initializes map and marker global variables
-        initializeMap: () => {
+        initialize: () => {
             // Access Token
             mapboxgl.accessToken = MAPBOX_KEY;
             // Create Map
@@ -29,6 +29,8 @@ $(() => {
             marker = new mapboxgl.Marker({
                 draggable: true
             });
+            // Set map and weather data to San Antonio
+            User.searchAddress("San Antonio, Texas");
         },
         // updates marker based on coordinates
         updateMarker: coords => {
@@ -250,9 +252,8 @@ $(() => {
         }
     }
 
-    // Initialize Map and center on San Antonio
-    Map.initializeMap();
-    User.searchAddress("San Antonio, Texas");
+    // Initialize Map
+    Map.initialize();
 
     // Add Event Listeners
     Event.checkForSearch();
