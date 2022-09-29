@@ -120,7 +120,7 @@ $(() => {
             $("#current-feels-like").html(`Feels Like ${parseInt(data.main.feels_like)} F`);
             $("#current-humidity").html(`${data.main.humidity}% Humidity`)
         }
-    }
+    };
     // Pretty object and methods
     const Pretty = {
         // receives string and returns same string with first letters of each word capitalized
@@ -179,7 +179,7 @@ $(() => {
                 return `${(date.getHours()-12).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${date.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})} PM`;
             }
         }
-    }
+    };
     // Deduce object and methods
     const Deduce = {
         // receives forecast weather and day, returns high temp
@@ -202,7 +202,7 @@ $(() => {
             }
             return parseInt(lowTemp);
         }
-    }
+    };
     // User object and methods
     const User = {
         // receives address string and gets coordinates then updates weather info and prints cards
@@ -213,7 +213,7 @@ $(() => {
                 Map.updateMarker(result);
             });
         }
-    }
+    };
     // Event object and methods
     const Event = {
         // sets up event listener for button click as well as enter input in search bar
@@ -242,7 +242,7 @@ $(() => {
                 Map.updateMarker([e.lngLat.lng, e.lngLat.lat]);
             });
         }
-    }
+    };
 
     // ------------ INITIALIZING AND EVENT LISTENERS ------------
     // Initialize Map
