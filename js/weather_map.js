@@ -5,7 +5,7 @@ $(() => {
     let map;
     let marker;
 
-    // ------------ Objects ------------
+    // ------------ OBJECTS ------------
     // Map object and methods
     const Map = {
         // initializes map and marker global variables
