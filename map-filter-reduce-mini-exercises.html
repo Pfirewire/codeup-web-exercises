@@ -90,10 +90,19 @@
     // FILTER
     // TODO 4: using filter, create a new array containing only dogs younger than 10 years old
     console.log('Exercise 4:');
+    const youngDogs = dogs.filter(dog => dog.age < 10 ? dog : false);
+    console.log(youngDogs);
+
     // TODO 5: using filter, create a new array containing only dogs named 'Lexie'
     console.log('Exercise 5:');
+    const lexieDogs = dogs.filter(dog => dog.dogName === "Lexie" ? dog : false);
+    console.log(lexieDogs);
+
     // TODO 6: using filter, create a new array containing only dogs that are trained and younger than 10
     console.log('Exercise 6:');
+    const youngTrainedDogs = dogs.filter(dog => dog.age < 10 && dog.isTrained ? dog : false);
+    console.log(youngTrainedDogs);
+
     // REDUCE
     // TODO 7: using reduce, return a string containing all dog names together with no spaces ("BubblesLexieDoggy...")
     console.log('Exercise 7:');
