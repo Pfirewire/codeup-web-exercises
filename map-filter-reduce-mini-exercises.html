@@ -115,25 +115,44 @@
     console.log(totalAge);
 
     // TODO 9: using reduce, return an array of dog objects with all isTrained properties set to true
-    console.log('Exercise 9:');
-    const trainAllDogs = dogs.reduce((trainedDogs, dog) => {
-        dog.isTrained = true;
-        trainedDogs.push(dog);
-        return trainedDogs;
-    }, []);
-    console.log(trainAllDogs);
+    // console.log('Exercise 9:');
+    // const trainAllDogs = dogs.reduce((trainedDogs, dog) => {
+    //     dog.isTrained = true;
+    //     trainedDogs.push(dog);
+    //     return trainedDogs;
+    // }, []);
+    // console.log(trainAllDogs);
 
     // EXTRA CHALLENGES
     // TODO 10: what is the average age of each dog?
     console.log('Exercise 10:');
+    const averageAge = (dogs.reduce((totalAge, dog) => totalAge + dog.age, 0)/dogs.length).toFixed(2);
+    console.log(averageAge);
+
     // TODO 11: what is the average age of dogs that are trained?
     console.log('Exercise 11:');
+    const totalTrainedAge = dogs.reduce((totalAge, dog) => dog.isTrained ? totalAge + dog.age : totalAge, 0);
+    const trainedDogs = dogs.filter(dog => dog.isTrained ? dog : false);
+    const averageTrainedAge = (totalTrainedAge / trainedDogs.length).toFixed(2);
+    console.log(averageTrainedAge);
+
     // TODO 12: what is the average length of names of untrained dogs?
     console.log('Exercise 12:');
+    const untrainedNames = dogs.reduce((names, dog) => !dog.isTrained ? names + dog.dogName : names, "");
+    const untrainedDogs = dogs.filter(dog => !dog.isTrained? dog : false);
+    const averageUntrainedNameLength = (untrainedNames.length / untrainedDogs.length).toFixed(2);
+    console.log(averageUntrainedNameLength);
+
     // TODO 13: what are the combined ages of all dogs in dog years? (7x more than a human year)
     console.log('Exercise 13:');
+    const totalDogAge = dogs.reduce((totalDogAge, dog) => totalDogAge + (dog.age * 7), 0);
+    console.log(totalDogAge);
+
     // TODO 14: create a string of the first letters of each dog name for dogs three years old (should be "LF")
     console.log('Exercise 14:');
+    const firstLettersThreeYearOldDogs = dogs.reduce((letters, dog) => dog.age === 3 ? letters + dog.dogName[0] : letters, "");
+    console.log(firstLettersThreeYearOldDogs);
+
 </script>
 </body>
 </html>
