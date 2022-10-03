@@ -51,14 +51,16 @@ $(() => {
     const longestEmail = users.reduce((longestEmail, user) => longestEmail.length < user.email.length ? user.email : longestEmail, "");
     // console.log(longestEmail);
 
-    const allUsers = `The users are: ${users.reduce((userNames, user) => userNames + `${user.name} `, "")}`;
+
+    const allUsers = users.reduce((userNames, user) => `${userNames} ${user.name}`, "The users are:");
     // console.log(allUsers);
 
     const languagesKnown = users.reduce((languages, user) => {
-        for(let e of user.languages) {
-            !languages.includes(e) ? languages.push(e) : false;
+        for(let language of user.languages) {
+            !languages.includes(language) ? languages.push(language) : false;
         }
         return languages;
     }, []);
     console.log(languagesKnown);
+
 });
