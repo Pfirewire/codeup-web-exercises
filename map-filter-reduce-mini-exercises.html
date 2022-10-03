@@ -115,13 +115,14 @@
     console.log(totalAge);
 
     // TODO 9: using reduce, return an array of dog objects with all isTrained properties set to true
-    // console.log('Exercise 9:');
-    // const trainAllDogs = dogs.reduce((trainedDogs, dog) => {
-    //     dog.isTrained = true;
-    //     trainedDogs.push(dog);
-    //     return trainedDogs;
-    // }, []);
-    // console.log(trainAllDogs);
+    console.log('Exercise 9:');
+    let dogsCopy = JSON.parse(JSON.stringify(dogs));
+    const trainAllDogs = dogsCopy.reduce((trainedDogs, dog) => {
+        dog.isTrained = true;
+        trainedDogs.push(dog);
+        return trainedDogs;
+    }, []);
+    console.log(trainAllDogs);
 
     // EXTRA CHALLENGES
     // TODO 10: what is the average age of each dog?
