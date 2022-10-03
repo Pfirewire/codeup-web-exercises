@@ -52,14 +52,15 @@ $(() => {
     // console.log(longestEmail);
 
 
-    const allUsers = users.reduce((userNames, user) => `${userNames} ${user.name}`, "The users are:");
-    // console.log(allUsers);
+    const allUsers = users.reduce((userNames, user, index, array) => index === 0 ? `${userNames} ${user.name}` : index < array.length - 1 ? `${userNames}, ${user.name}` : `${userNames}, ${user.name}.`, "The users are:");
+    console.log(allUsers);
 
     const languagesKnown = users.reduce((languages, user) => {
         for(let language of user.languages) {
             !languages.includes(language) ? languages.push(language) : false;
+            return languages;
         }
-        return languages;
+
     }, []);
     console.log(languagesKnown);
 
