@@ -200,47 +200,48 @@ $(() => {
 //
 
     // When user clicks button with text "Change Heading", the text of the h1 element changes to read "I pwn the DOM"
+    //
+    // $("button").click(() => {
+    //     $("h1").html("I pwn the DOM");
+    // });
+    //
+    // // Every time the user enters a character in the input with id "source", that character appears in the <p> element with the id "output"
+    // $("#source").keyup(() => {
+    //     $("#output").html($("#source").val());
+    // });
+    //
+    // // When the mouse enters the h2 with the text "Lorem Generator",
+    // // A paragraph containing lorem appears in the div with the id of loremParagraphs
+    //
+    // $("h2").mouseenter(() => {
+    //     $("#loremParagraphs").append(`
+    //         <p>
+    //             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget nisl vel turpis rutrum tempus. Cras ante tellus, accumsan sit amet lectus ac, aliquam mollis erat. Etiam dignissim, velit ac ultrices sollicitudin, risus diam luctus erat, vitae ultrices erat lectus sit amet purus. Vestibulum ac elementum nibh, a vestibulum ligula. Phasellus eleifend fringilla ex in aliquet. Nullam iaculis non lectus et pellentesque. Nam aliquet congue sem, eget posuere justo tempor nec. Phasellus ornare in dui quis vehicula. Nam fermentum massa eget orci gravida, vitae bibendum eros eleifend. Fusce eleifend at sem ac commodo. Mauris sit amet pulvinar nisi, ut suscipit mi.
+    //         </p>
+    //     `);
+    // });
+    //
+    // // When the user clicks the "Hot Pink It" button, all the text in the div with id of loremParagraphs
+    // // turns hot pink
+    //
+    // $("#hotPinkIt").click(() => {
+    //     $("#loremParagraphs").addClass("hot-pink-text");
+    // });
+    //
+    //
+    // // Bonus challenge: when the user clicks on the "Pink Blinky" button, all the text in the div with the id of loremParagraphs
+    // // alternates between black and hotpink once every three seconds.
+    //
+    // $("#pinkBlinky").click(() => {
+    //     $("#loremParagraphs").addClass("hot-pink-text");
+    //     togglePink();
+    // })
+    //
+    // function togglePink() {
+    //     setInterval(() => {
+    //         $("#loremParagraphs").toggleClass("hot-pink-text");
+    //     }, 3000);
+    // }
 
-    $("button").click(() => {
-        $("h1").html("I pwn the DOM");
-    });
-
-    // Every time the user enters a character in the input with id "source", that character appears in the <p> element with the id "output"
-    $("#source").keyup(() => {
-        $("#output").html($("#source").val());
-    });
-
-    // When the mouse enters the h2 with the text "Lorem Generator",
-    // A paragraph containing lorem appears in the div with the id of loremParagraphs
-
-    $("h2").mouseenter(() => {
-        $("#loremParagraphs").append(`
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget nisl vel turpis rutrum tempus. Cras ante tellus, accumsan sit amet lectus ac, aliquam mollis erat. Etiam dignissim, velit ac ultrices sollicitudin, risus diam luctus erat, vitae ultrices erat lectus sit amet purus. Vestibulum ac elementum nibh, a vestibulum ligula. Phasellus eleifend fringilla ex in aliquet. Nullam iaculis non lectus et pellentesque. Nam aliquet congue sem, eget posuere justo tempor nec. Phasellus ornare in dui quis vehicula. Nam fermentum massa eget orci gravida, vitae bibendum eros eleifend. Fusce eleifend at sem ac commodo. Mauris sit amet pulvinar nisi, ut suscipit mi. 
-            </p>
-        `);
-    });
-
-    // When the user clicks the "Hot Pink It" button, all the text in the div with id of loremParagraphs
-    // turns hot pink
-
-    $("#hotPinkIt").click(() => {
-        $("#loremParagraphs").addClass("hot-pink-text");
-    });
-
-
-    // Bonus challenge: when the user clicks on the "Pink Blinky" button, all the text in the div with the id of loremParagraphs
-    // alternates between black and hotpink once every three seconds.
-
-    $("#pinkBlinky").click(() => {
-        $("#loremParagraphs").addClass("hot-pink-text");
-        togglePink();
-    })
-
-    function togglePink() {
-        setInterval(() => {
-            $("#loremParagraphs").toggleClass("hot-pink-text");
-        }, 3000);
-    }
 
 });
