@@ -13,12 +13,13 @@
         let userCode = "";
         $(document).keyup(function(event){
             userCode = `${userCode + ((event.key).toString())} `;
-            if (userCode === "ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a Enter ") {
+            if (userCode.includes("ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight b a Enter ")) {
                 //alert(`Cheat enabled!`);
                 $("body").css("background-color", "black");
                 $("body").css("color", "red");
                 $("h1").html("CHEAT MODE ENABLED");
             }
+            console.log(userCode);
         });
 
     </script>

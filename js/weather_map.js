@@ -53,6 +53,7 @@ $(() => {
                 units: "imperial"
             // takes data received and prints to screen
             }).done(data => {
+                console.log(data);
                 Print.tomorrowCard(data);
                 Print.upcomingCards(data);
             });

@@ -73,7 +73,7 @@
     // let books = [
     //     {title: "Lord of the Rings", author: {firstName: "J.R.R", lastName: "Tolkien"}},
     //     {title: "Foundation", author: {firstName: "Isaac", lastName: "Asimov"}},
-    //     {title: "Hitchhiker's Guide to the Galaxy", author: {firstName: "Douglass", lastName: "Adams"}},
+    //     {title: "Hitchhiker's Guide to the Galaxy", author: {firstName: "Douglas", lastName: "Adams"}},
     //     {title: "Lamb: The Gospel According to Biff, Christ's Childhood Pal", author: {firstName: "Christopher", lastName: "Moore"}},
     //     {title: "Coraline", author: {firstName: "Neil", lastName: "Gaiman"}}
     // ];
